@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Multithreading/Multiprocessing benchmark results</title>
+<style>
+
+body {
+  font-size: 10pt;
+}
+
+h2 {
+  padding-top: 10pt;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed ;
+}
+
+td, th {
+  border: 2px solid #b9b9b9;
+  padding: 10px;
+  text-align: center;
+  width: 25% ;
+}
+
+th {
+  background-color: #d5d5d5;
+}
+
+td {
+}
+
+tr:nth-child(odd) {
+  background-color: #eeeeee;
+}
+</style>
+</head>
+<body>
+
+<h1>Multithreading/Multiprocessing benchmark results</h1>
+<p>
+</p>
+
+<h2>Execution environment</h2>
+<p>
+
+Python version: 3.7.5<br/>
+Interpreter: CPython<br/>
+Interpreter version: 3.7.5 Stackless 3.7 (tags/v3.7.5-slp:f7925f2a02, Oct 20 2019, 15:28:53) [MSC v.1916 64 bit (AMD64)]<br/>
+Operating system: Windows<br/>
+Operating system version: 10<br/>
+Processor: Intel64 Family 6 Model 58 Stepping 9, GenuineIntel<br/>
+CPUs: 4
+
+</p>
+
+
+<h2>Test results</h2>
+<p>The following table shows detailed test results:</p>
+<table>
+  <tr>
+    <th>Execution:</th>
+    <th>1&nbsp;thread (s)</th>
+    <th>4&nbsp;threads (s)</th>
+    <th>4&nbsp;processes (s)</th>
+    <th>processes based on number of CPUs (s)</th>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>44.850</td>
+    <td>45.656</td>
+    <td>14.006</td>
+    <td>12.946</td>
+  </tr>
+
+  <tr>
+    <td>2</td>
+    <td>45.160</td>
+    <td>45.785</td>
+    <td>13.057</td>
+    <td>13.269</td>
+  </tr>
+
+  <tr>
+    <td>3</td>
+    <td>45.637</td>
+    <td>46.578</td>
+    <td>13.515</td>
+    <td>13.091</td>
+  </tr>
+
+  <tr>
+    <td>4</td>
+    <td>45.928</td>
+    <td>44.839</td>
+    <td>13.069</td>
+    <td>14.712</td>
+  </tr>
+
+  <tr>
+    <td>5</td>
+    <td>46.119</td>
+    <td>48.441</td>
+    <td>15.113</td>
+    <td>14.515</td>
+  </tr>
+
+</table>
+
+<h2>Summary</h2>
+<p>The following table shows the median of all results:</p>
+<table>
+  <tr>
+    <th>Execution:</th>
+    <th>1&nbsp;thread (s)</th>
+    <th>4&nbsp;threads (s)</th>
+    <th>4&nbsp;processes (s)</th>
+    <th>processes based on number of CPUs (s)</th>
+  </tr>
+
+  <tr>
+    <td>Median:</td>
+    <td>45.637</td>
+    <td>45.785</td>
+    <td>13.515</td>
+    <td>13.269</td>
+  </tr>
+
+</table>
+
+<p>App author: Jan Kowalski</p>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Multithreading/Multiprocessing benchmark results</title>
+<style>
+
+body {
+  font-size: 10pt;
+}
+
+h2 {
+  padding-top: 10pt;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed ;
+}
+
+td, th {
+  border: 2px solid #b9b9b9;
+  padding: 10px;
+  text-align: center;
+  width: 25% ;
+}
+
+th {
+  background-color: #d5d5d5;
+}
+
+td {
+}
+
+tr:nth-child(odd) {
+  background-color: #eeeeee;
+}
+</style>
+</head>
+<body>
+
+<h1>Multithreading/Multiprocessing benchmark results</h1>
+<p>
+</p>
+
+<h2>Execution environment</h2>
+<p>
+
+Python version: 3.8.5<br/>
+Interpreter: CPython<br/>
+Interpreter version: 3.8.5 (default, Jul 28 2020, 12:59:40) 
+[GCC 9.3.0]<br/>
+Operating system: Linux<br/>
+Operating system version: 5.4.0-48-generic<br/>
+Processor: x86_64<br/>
+CPUs: 8
+
+</p>
+
+
+<h2>Test results</h2>
+<p>The following table shows detailed test results:</p>
+<table>
+  <tr>
+    <th>Execution:</th>
+    <th>1&nbsp;thread (s)</th>
+    <th>4&nbsp;threads (s)</th>
+    <th>4&nbsp;processes (s)</th>
+    <th>processes based on number of CPUs (s)</th>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>13.774</td>
+    <td>13.678</td>
+    <td>3.942</td>
+    <td>4.038</td>
+  </tr>
+
+  <tr>
+    <td>2</td>
+    <td>13.366</td>
+    <td>13.735</td>
+    <td>4.048</td>
+    <td>3.760</td>
+  </tr>
+
+  <tr>
+    <td>3</td>
+    <td>13.579</td>
+    <td>13.636</td>
+    <td>4.006</td>
+    <td>3.902</td>
+  </tr>
+
+  <tr>
+    <td>4</td>
+    <td>13.491</td>
+    <td>13.654</td>
+    <td>4.144</td>
+    <td>3.786</td>
+  </tr>
+
+  <tr>
+    <td>5</td>
+    <td>13.573</td>
+    <td>13.753</td>
+    <td>4.162</td>
+    <td>4.266</td>
+  </tr>
+
+</table>
+
+<h2>Summary</h2>
+<p>The following table shows the median of all results:</p>
+<table>
+  <tr>
+    <th>Execution:</th>
+    <th>1&nbsp;thread (s)</th>
+    <th>4&nbsp;threads (s)</th>
+    <th>4&nbsp;processes (s)</th>
+    <th>processes based on number of CPUs (s)</th>
+  </tr>
+
+  <tr>
+    <td>Median:</td>
+    <td>13.573</td>
+    <td>13.678</td>
+    <td>4.048</td>
+    <td>3.902</td>
+  </tr>
+
+</table>
+
+<p>App author: Jan Kowalski</p>
+
+</body>
+</html>
