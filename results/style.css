@@ -1,0 +1,10 @@
+body {
+    width: 100%;
+    margin: 0;
+}
+
+section {
+    display: flex;
+    max-width: 900px;
+    justify-content: space-between;
+}

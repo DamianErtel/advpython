@@ -5,6 +5,7 @@ import concurrent.futures
 import time
 import timeit
 from data import numbers_data
+from html_builder import build_html
 
 # define system variables
 
@@ -55,11 +56,10 @@ def multi_process():
     split_numbers = list(split(numbers, 4))
     with concurrent.futures.ProcessPoolExecutor(max_workers=4) as executor:
         start_time = time.time()
-        wyniki_czastkowe = executor.map(count, identifiers, split_numbers)
-        suma_wszystkich = sum(wyniki_czastkowe)
-        print("EXEC TIME - 4 PROCESS: ", (time.time() - start_time))
-
-    # print('suma:', suma_wszystkich)
+        executor.map(count, identifiers, split_numbers)
+        time_result = (time.time() - start_time)
+        print("MP", time_result)
+    return time_result
 
 
 def multi_process_max():
@@ -71,11 +71,10 @@ def multi_process_max():
     split_numbers = list(split(numbers, processor_count))
     with concurrent.futures.ProcessPoolExecutor() as executor:
         start_time = time.time()
-        wyniki_czastkowe = executor.map(count, identifiers, split_numbers)
-        suma_wszystkich = sum(wyniki_czastkowe)
-        print("EXEC TIME - MAX PROCESS: ", (time.time() - start_time))
-
-    # print('suma2:', suma_wszystkich)
+        executor.map(count, identifiers, split_numbers)
+        time_result = (time.time() - start_time)
+        print("MP MAX", time_result)
+    return time_result
 
 
 def multi_thread():
@@ -84,11 +83,10 @@ def multi_thread():
     split_numbers = list(split(numbers, 4))
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         start_time = time.time()
-        wyniki_czastkowe = executor.map(count, identifiers, split_numbers)
-        suma_wszystkich = sum(wyniki_czastkowe)
-        print("EXEC TIME - 4 THREADS: ", (time.time() - start_time))
-
-    # print('suma:', suma_wszystkich)
+        executor.map(count, identifiers, split_numbers)
+        time_result = (time.time() - start_time)
+        print("MT", time_result)
+    return time_result
 
 
 def single_thread():
@@ -97,18 +95,37 @@ def single_thread():
     split_numbers = list(split(numbers, 1))
     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
         start_time = time.time()
-        wyniki_czastkowe = executor.map(count, identifiers, split_numbers)
-        suma_wszystkich = sum(wyniki_czastkowe)
-        print("EXEC TIME - ONE THREAD: ", (time.time() - start_time))
+        executor.map(count, identifiers, split_numbers)
+        time_result = (time.time() - start_time)
+        print("ST", time_result)
+    return time_result
 
-    # print('suma:', suma_wszystkich)
+
+def fill_result_array(arr, func, times):
+    for i in range(times):
+        arr.append(func())
 
 
 def main():
-    multi_process()
-    multi_process_max()
-    multi_thread()
-    single_thread()
+    multi_process_result = []
+    multi_process_max_result = []
+    multi_thread_max_result = []
+    single_thread_result = []
+
+    result_list = [multi_process_result, multi_process_max_result, multi_thread_max_result, single_thread_result]
+    func_list = [multi_process, multi_process_max, multi_thread, single_thread]
+
+    for i in result_list:
+        func = func_list[result_list.index(i)]
+        fill_result_array(i, func, 5)
+
+    nameplate_list = ["MP", "MPM", "MT", "ST"]
+
+    result_dict = dict(zip(nameplate_list, result_list))
+
+    build_html(result_dict)
+
+    # print(result_dict)
 
 
 if __name__ == '__main__':
