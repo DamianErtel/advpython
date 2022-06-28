@@ -26,6 +26,7 @@ span > div {
     border-bottom: 2px solid #b9b9b9;
     border-left: 2px solid #b9b9b9;
     border-left: 2px solid #b9b9b9;
+    padding: 5px 0;
 }
 
 span > div:nth-child(1) {
@@ -46,9 +47,12 @@ span > div:nth-child(5) {
 }
 
 h2 {
+    font-size: 14px;
     background: #eeeeee;
     color: black;
     text-align: center;
-    width: 25vw;
+    width: 20vw;
+    display: block;
+    padding: 5px 0;
     margin: 0;
 }

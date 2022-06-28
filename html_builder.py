@@ -34,6 +34,7 @@ sys_info_complete = (sys_info_base
                      .replace("processor_count", str(processor_count))
                      )
 
+execution = '<div><h2>Execution</h2><span><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div></span></div>'
 
 def createColumn(results, tag):
     table_data = ""
@@ -56,7 +57,7 @@ def build_html(results, sys_vars):
 
     headers = "<div>"
     cols = "<section>"
-
+    cols += execution
     for i in results:
         header = "<h2>" + i + "</h2>"
         row = "<span class=" + i + ">"
