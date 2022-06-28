@@ -36,6 +36,16 @@ processor_count = os.cpu_count()
 #
 # print("\nresult1: ", result)
 
+def add_sys_vars(arr):
+    # html_args = map(lambda x: "<p>" + str(x) + "</p>", args)
+    # print(sum(html_args))
+    html_base = '<section class="sysvars">'
+    for i in arr:
+        html_base += '<p>' + str(i) + '</p>'
+    html_base += "</section>"
+    return html_base
+
+
 def count(identifier, numbers):
     suma = 0
     for i in numbers:
@@ -119,11 +129,13 @@ def main():
         func = func_list[result_list.index(i)]
         fill_result_array(i, func, 5)
 
-    nameplate_list = ["MP", "MPM", "MT", "ST"]
+    nameplate_list = ["4 processes (s)", "processes based on number of CPUs (s)", "4 threads (s)", "1 thread (s)"]
 
     result_dict = dict(zip(nameplate_list, result_list))
 
-    build_html(result_dict)
+    sys_vars = add_sys_vars([python_v, python_interpreter, system_type, system_v, processor_type, processor_count])
+
+    build_html(result_dict, sys_vars)
 
     # print(result_dict)
 

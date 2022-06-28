@@ -1,7 +1,38 @@
+import platform
+import sys
+import os
+
 html_boilerplate_top = '<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8"><title>DAMIAN ERTEL ADV. PYTHON PROJECT</title><link rel="stylesheet" href="style.css"></head>'
-html_boilerplate_middle = '<body><section>'
-html_boilerplate_bottom = '</section></body></html>'
-#
+html_boilerplate_middle = '<body>'
+html_boilerplate_bottom = '</body></html>'
+
+python_v = platform.python_version()
+python_interpreter = sys.version
+system_type = platform.system()
+system_v = platform.release()
+processor_type = platform.processor()
+processor_count = os.cpu_count()
+
+sys_info_base = '''
+<h2>Execution environment</h2>
+<p>
+Python version: python_v<br/>
+Interpreter: python_interpreter<br/>
+Operating system: system_type<br/>
+Operating system version: system_v<br/>
+Processor: processor_type<br/>
+CPUs: processor_count
+</p>
+'''
+
+sys_info_complete = (sys_info_base
+                     .replace("python_v", str(python_v))
+                     .replace("python_interpreter", str(python_interpreter))
+                     .replace("system_type", str(system_type))
+                     .replace("system_v", str(system_v))
+                     .replace("processor_type", str(processor_type))
+                     .replace("processor_count", str(processor_count))
+                     )
 
 
 def createColumn(results, tag):
@@ -11,35 +42,38 @@ def createColumn(results, tag):
 
     return table_data
 
+
 def create_headers(column_name):
     table_header = "<h2>" + column_name + "</h2>"
     return table_header
 
-def build_html(results):
+
+def build_html(results, sys_vars):
     # mp = results["MP"]
     # mpm = results["MPM"]
     # mt = results["MT"]
     # st = results["ST"]
 
     headers = "<div>"
-    cols = ""
+    cols = "<section>"
 
     for i in results:
         header = "<h2>" + i + "</h2>"
-        row = "<div className=" + i + ">"
+        row = "<span class=" + i + ">"
         span = map(lambda x: "<div>" + str(x) + "</div>", results[i])
         results[i] = list(span)
         headers += create_headers(i)
         column = createColumn(results, i)
         row += column
-        row += "</div>"
+        row += "</span>"
         col = "<div>" + header + row + "</div>"
         cols += col
         # print("COLUMN", row)
 
+    cols += "</section>"
     headers += "</div>"
     # print(headers)
-    ready_html = html_boilerplate_top + html_boilerplate_middle + cols + html_boilerplate_bottom
+    ready_html = html_boilerplate_top + html_boilerplate_middle + sys_info_complete + cols + html_boilerplate_bottom
 
     f = open("./results/myfile.html", "w")
     f.write(ready_html)
