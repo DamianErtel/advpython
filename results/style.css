@@ -8,6 +8,7 @@ body {
 section {
     margin-top: 100px;
     display: flex;
+    border-top: 2px solid #b9b9b9;
 }
 
 section > div:last-child {
@@ -55,4 +56,46 @@ h2 {
     display: block;
     padding: 5px 0;
     margin: 0;
+}
+
+.median {
+    border-right: 2px solid #b9b9b9;
+    border-bottom: 2px solid #b9b9b9;
+    border-top: 2px solid #b9b9b9;
+}
+
+.median > .result {
+    display: block;
+    color: black;
+    text-align: center;
+    background: #eeeeee;
+    border-bottom: 2px solid #b9b9b9;
+    border-left: 2px solid #b9b9b9;
+    border-left: 2px solid #b9b9b9;
+    padding: 5px 0;
+}
+
+.median > div:last-child {
+    border-right: none;
+}
+
+.median > div > h2 {
+    border-bottom: 2px solid #b9b9b9;
+    border-left:  2px solid #b9b9b9;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.median > div > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 2px solid #b9b9b9;
+    min-height: 30px;
+}
+
+.median > div:last-child > span {
+    /*border-right: 2px solid #b9b9b9;*/
 }

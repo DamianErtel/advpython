@@ -34,7 +34,8 @@ sys_info_complete = (sys_info_base
                      .replace("processor_count", str(processor_count))
                      )
 
-execution = '<div><h2>Execution</h2><span><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div></span></div>'
+execution = '<div><h2>Execution:</h2><span><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div></span></div>'
+execution_median = '<div><h2>Execution:</h2><span>Median:</span></div>'
 
 def createColumn(results, tag):
     table_data = ""
@@ -49,7 +50,7 @@ def create_headers(column_name):
     return table_header
 
 
-def build_html(results):
+def build_html(results, median_list, nameplate_list):
     # mp = results["MP"]
     # mpm = results["MPM"]
     # mt = results["MT"]
@@ -74,7 +75,15 @@ def build_html(results):
     cols += "</section>"
     headers += "</div>"
     # print(headers)
-    ready_html = html_boilerplate_top + html_boilerplate_middle + sys_info_complete + cols + html_boilerplate_bottom
+
+    median_section = '<section class="median">' + execution_median
+    median_span = list(map(lambda x, name: '<div><h2>' + name + '</h2><span class="result">' + str(x) + '</span></div>', median_list, nameplate_list))
+    for i in median_span:
+        median_section += i
+
+    median_section += '</section>'
+
+    ready_html = html_boilerplate_top + html_boilerplate_middle + sys_info_complete + cols + median_section + html_boilerplate_bottom
 
     f = open("./results/myfile.html", "w")
     f.write(ready_html)

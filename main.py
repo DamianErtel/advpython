@@ -68,7 +68,7 @@ def multi_process():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    print("MP MAX", timeit_result)
+    # print("MP", timeit_result)
     return round(timeit_result, 4)
 
 
@@ -85,7 +85,7 @@ def multi_process_max():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    print("MP MAX", timeit_result)
+    # print("MP MAX", timeit_result)
     return round(timeit_result, 4)
 
 
@@ -99,7 +99,7 @@ def multi_thread():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    print("MT", timeit_result)
+    # print("MT", timeit_result)
     return round(timeit_result, 4)
 
 
@@ -113,7 +113,7 @@ def single_thread():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    print("ST", timeit_result)
+    # print("ST", timeit_result)
     return round(timeit_result, 4)
 
 
@@ -135,13 +135,22 @@ def main():
         func = func_list[result_list.index(i)]
         fill_result_array(i, func, 5)
 
+    median_list = []
+
+    for i in result_list:
+        x = [*i]
+        x.sort()
+        median_index = (len(x) - 2) // 2
+        median = x[median_index]
+        median_list.append(median)
+
     nameplate_list = ["4 processes (s)", "processes based on number of CPUs (s)", "4 threads (s)", "1 thread (s)"]
 
     result_dict = dict(zip(nameplate_list, result_list))
 
-    build_html(result_dict)
+    build_html(result_dict, median_list, nameplate_list)
 
-    # print(result_dict)
+    return
 
 
 if __name__ == '__main__':
