@@ -49,7 +49,7 @@ def create_headers(column_name):
     return table_header
 
 
-def build_html(results, sys_vars):
+def build_html(results):
     # mp = results["MP"]
     # mpm = results["MPM"]
     # mt = results["MT"]

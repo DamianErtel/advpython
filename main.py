@@ -1,5 +1,5 @@
-import platform
-import sys
+# import platform
+# import sys
 import os
 import concurrent.futures
 import time
@@ -9,11 +9,11 @@ from html_builder import build_html
 
 # define system variables
 
-python_v = platform.python_version()
-python_interpreter = sys.version
-system_type = platform.system()
-system_v = platform.release()
-processor_type = platform.processor()
+# python_v = platform.python_version()
+# python_interpreter = sys.version
+# system_type = platform.system()
+# system_v = platform.release()
+# processor_type = platform.processor()
 processor_count = os.cpu_count()
 
 
@@ -46,11 +46,9 @@ def add_sys_vars(arr):
     return html_base
 
 
-def count(identifier, numbers):
+def count(numbers):
     suma = 0
     for i in numbers:
-        # print("id:", identifier, "i =", i)
-        # time.sleep(1)
         suma += i
     return suma
 
@@ -64,12 +62,14 @@ def multi_process():
     identifiers = ["P1", "P2", "P3", "P4"]
     numbers = numbers_data.numbers
     split_numbers = list(split(numbers, 4))
-    with concurrent.futures.ProcessPoolExecutor(max_workers=4) as executor:
-        start_time = time.time()
-        executor.map(count, identifiers, split_numbers)
-        time_result = (time.time() - start_time)
-        print("MP", time_result)
-    return time_result
+
+    def test():
+        with concurrent.futures.ProcessPoolExecutor(max_workers=4) as executor:
+            executor.map(count, identifiers, split_numbers)
+
+    timeit_result = timeit.timeit(test, number=1)
+    print("MP MAX", timeit_result)
+    return round(timeit_result, 4)
 
 
 def multi_process_max():
@@ -79,36 +79,42 @@ def multi_process_max():
         identifiers.append("P" + str(i + 1))
 
     split_numbers = list(split(numbers, processor_count))
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        start_time = time.time()
-        executor.map(count, identifiers, split_numbers)
-        time_result = (time.time() - start_time)
-        print("MP MAX", time_result)
-    return time_result
+
+    def test():
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            executor.map(count, identifiers, split_numbers)
+
+    timeit_result = timeit.timeit(test, number=1)
+    print("MP MAX", timeit_result)
+    return round(timeit_result, 4)
 
 
 def multi_thread():
     identifiers = ["T1", "T2", "T3", "T4"]
     numbers = numbers_data.numbers
     split_numbers = list(split(numbers, 4))
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-        start_time = time.time()
-        executor.map(count, identifiers, split_numbers)
-        time_result = (time.time() - start_time)
-        print("MT", time_result)
-    return time_result
+
+    def test():
+        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+            executor.map(count, identifiers, split_numbers)
+
+    timeit_result = timeit.timeit(test, number=1)
+    print("MT", timeit_result)
+    return round(timeit_result, 4)
 
 
 def single_thread():
     identifiers = ["T1"]
     numbers = numbers_data.numbers
     split_numbers = list(split(numbers, 1))
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-        start_time = time.time()
-        executor.map(count, identifiers, split_numbers)
-        time_result = (time.time() - start_time)
-        print("ST", time_result)
-    return time_result
+
+    def test():
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+            executor.map(count, identifiers, split_numbers)
+
+    timeit_result = timeit.timeit(test, number=1)
+    print("ST", timeit_result)
+    return round(timeit_result, 4)
 
 
 def fill_result_array(arr, func, times):
@@ -133,9 +139,7 @@ def main():
 
     result_dict = dict(zip(nameplate_list, result_list))
 
-    sys_vars = add_sys_vars([python_v, python_interpreter, system_type, system_v, processor_type, processor_count])
-
-    build_html(result_dict, sys_vars)
+    build_html(result_dict)
 
     # print(result_dict)
 
