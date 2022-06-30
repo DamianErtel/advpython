@@ -7,7 +7,7 @@ html_boilerplate_middle = '<body>'
 html_boilerplate_bottom = '</body></html>'
 
 python_v = platform.python_version()
-python_interpreter_name = platform.python_version()
+python_interpreter_name = platform.python_implementation()
 python_interpreter = sys.version
 system_type = platform.system()
 system_v = platform.release()
