@@ -101,7 +101,6 @@ def main():
     for i in result_list:
         x = [*i]
         x.sort()
-        print(x)
         median = x[2]
         median_list.append(median)
 
