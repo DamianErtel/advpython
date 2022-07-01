@@ -2,8 +2,9 @@ import platform
 import sys
 import os
 
-html_boilerplate_top = '<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8"><title>DAMIAN ERTEL ADV. PYTHON PROJECT</title><link rel="stylesheet" href="style.css"></head>'
-html_boilerplate_middle = '<body>'
+html_boilerplate_top = '<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8">' +\
+                       '<title>DAMIAN ERTEL ADV. PYTHON PROJECT</title>' +\
+                       '<link rel="stylesheet" href="style.css"></head><body>'
 html_boilerplate_bottom = '</body></html>'
 
 python_v = platform.python_version()
@@ -15,7 +16,7 @@ processor_type = platform.processor()
 processor_count = os.cpu_count()
 
 sys_info_base = '''
-<h2>Execution environment</h2>
+<h4>Execution environment</h4>
 <p>
 Python version: python_v<br/>
 Interpreter: python_interpreter_name<br/>
@@ -44,7 +45,7 @@ top_heading = '<div><h1>Test results</h1><p>The following table shows detailed t
 bottom_heading = '<div><h1>Summary</h1><p>The following table shows the median of all results:</p></div>'
 author = '<span>App author: Damian Ertel</span>'
 
-def createColumn(results, tag):
+def create_column(results, tag):
     table_data = ""
     for i in results[tag]:
         table_data += i
@@ -52,45 +53,32 @@ def createColumn(results, tag):
     return table_data
 
 
-def create_headers(column_name):
-    table_header = "<h2>" + column_name + "</h2>"
-    return table_header
-
-
 def build_html(results, median_list, nameplate_list):
-    # mp = results["MP"]
-    # mpm = results["MPM"]
-    # mt = results["MT"]
-    # st = results["ST"]
-
-    headers = "<div>"
     cols = "<section>"
     cols += execution
     for i in results:
         header = "<h2>" + i + "</h2>"
-        row = "<span class=" + i + ">"
-        span = map(lambda x: "<div>" + str(x) + "</div>", results[i])
-        results[i] = list(span)
-        headers += create_headers(i)
-        column = createColumn(results, i)
+        row = "<span>"
+        result_div = map(lambda x: "<div>" + str(x) + "</div>", results[i])
+        results[i] = list(result_div)
+        column = create_column(results, i)
         row += column
         row += "</span>"
         col = "<div>" + header + row + "</div>"
         cols += col
-        # print("COLUMN", row)
 
     cols += "</section>"
-    headers += "</div>"
-    # print(headers)
 
     median_section = '<section class="median">' + execution_median
-    median_span = list(map(lambda x, name: '<div><h2>' + name + '</h2><span class="result">' + str(x) + '</span></div>', median_list, nameplate_list))
+    median_span = list(map(lambda x, name: '<div><h2>' + name + '</h2><span class="result">' + str(x) + '</span></div>',
+                           median_list, nameplate_list))
     for i in median_span:
         median_section += i
 
     median_section += '</section>'
 
-    ready_html = html_boilerplate_top + html_boilerplate_middle + project_header + sys_info_complete + top_heading + cols + bottom_heading + median_section + author + html_boilerplate_bottom
+    full_sections = sys_info_complete + top_heading + cols + bottom_heading + median_section + author
+    ready_html = html_boilerplate_top + project_header + full_sections + html_boilerplate_bottom
 
     f = open("./results/myfile.html", "w")
     f.write(ready_html)

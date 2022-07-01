@@ -9,10 +9,15 @@ section {
     margin-top: 10px;
     display: flex;
     border-top: 2px solid #b9b9b9;
+    border-right: 2px solid #b9b9b9;
 }
 
-section > div:last-child {
-    border-right: 2px solid #b9b9b9;
+section > div {
+    width: 20%;
+}
+
+section > div > h2 {
+    width: 100%;
 }
 
 section > div > span > div:first-child {
@@ -56,6 +61,7 @@ h2 {
     display: block;
     padding: 5px 0;
     margin: 0;
+    min-height: 36px;
 }
 
 .median {
@@ -81,7 +87,6 @@ h2 {
 
 .median > div > h2 {
     border-bottom: 2px solid #b9b9b9;
-    border-left:  2px solid #b9b9b9;
     min-height: 30px;
     display: flex;
     align-items: center;
@@ -94,8 +99,4 @@ h2 {
     justify-content: center;
     border-left: 2px solid #b9b9b9;
     min-height: 30px;
-}
-
-.median > div:last-child > span {
-    /*border-right: 2px solid #b9b9b9;*/
 }

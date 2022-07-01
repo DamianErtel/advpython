@@ -33,7 +33,7 @@ def multi_process():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    return round(timeit_result, 4)
+    return "%.3f" % round(timeit_result, 3)
 
 
 def multi_process_max():
@@ -49,7 +49,7 @@ def multi_process_max():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    return round(timeit_result, 4)
+    return "%.3f" % round(timeit_result, 3)
 
 
 def multi_thread():
@@ -62,7 +62,7 @@ def multi_thread():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    return round(timeit_result, 4)
+    return "%.3f" % round(timeit_result, 3)
 
 
 def single_thread():
@@ -75,7 +75,7 @@ def single_thread():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    return round(timeit_result, 4)
+    return "%.3f" % round(timeit_result, 3)
 
 
 def fill_result_array(arr, func, times):
@@ -101,8 +101,8 @@ def main():
     for i in result_list:
         x = [*i]
         x.sort()
-        median_index = (len(x) - 2) // 2
-        median = x[median_index]
+        print(x)
+        median = x[2]
         median_list.append(median)
 
     nameplate_list = ["4 processes (s)", "processes based on number of CPUs (s)", "4 threads (s)", "1 thread (s)"]
