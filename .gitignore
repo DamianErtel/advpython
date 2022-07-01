@@ -1,3 +1,5 @@
 .idea/
 /pypy3.9-v7.3.9-win64
 /ignored
+__pycache__
+/results/myfile.html
