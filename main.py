@@ -1,44 +1,15 @@
-# import platform
-# import sys
 import os
 import concurrent.futures
-import time
 import timeit
+from split import split
 from data import numbers_data
 from html_builder import build_html
 
-# define system variables
 
-# python_v = platform.python_version()
-# python_interpreter = sys.version
-# system_type = platform.system()
-# system_v = platform.release()
-# processor_type = platform.processor()
 processor_count = os.cpu_count()
 
 
-# check system variables
-
-# print(python_v)
-# print(python_interpreter)
-# print(system_type)
-# print(system_v)
-# print(processor_type)
-# print(processor_count)
-
-
-# execute code
-
-# numbers = numbers_data.numbers
-# result = 0
-# for num in numbers:
-#     result += num
-#
-# print("\nresult1: ", result)
-
 def add_sys_vars(arr):
-    # html_args = map(lambda x: "<p>" + str(x) + "</p>", args)
-    # print(sum(html_args))
     html_base = '<section class="sysvars">'
     for i in arr:
         html_base += '<p>' + str(i) + '</p>'
@@ -52,12 +23,6 @@ def count(numbers):
         suma += i
     return suma
 
-
-def split(a, n):
-    k, m = divmod(len(a), n)
-    return (a[i * k + min(i, m):(i + 1) * k + min(i + 1, m)] for i in range(n))
-
-
 def multi_process():
     identifiers = ["P1", "P2", "P3", "P4"]
     numbers = numbers_data.numbers
@@ -68,7 +33,6 @@ def multi_process():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    # print("MP", timeit_result)
     return round(timeit_result, 4)
 
 
@@ -85,7 +49,6 @@ def multi_process_max():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    # print("MP MAX", timeit_result)
     return round(timeit_result, 4)
 
 
@@ -99,7 +62,6 @@ def multi_thread():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    # print("MT", timeit_result)
     return round(timeit_result, 4)
 
 
@@ -113,7 +75,6 @@ def single_thread():
             executor.map(count, identifiers, split_numbers)
 
     timeit_result = timeit.timeit(test, number=1)
-    # print("ST", timeit_result)
     return round(timeit_result, 4)
 
 
